@@ -118,7 +118,7 @@ if(isset($_COOKIE['uname'])){
 		          		<td><?php echo $user["pass"];?></td>
 		          		<td><?php echo $user["uname"];?></td>
 		          		<td><?php echo $user["utype"];?></td>
-		          		 <td><a href="edit.php?id=<?php echo $user['id'];?>"/>Edit</a></td>
+		          		
 
 		          	</tr>
 		         	

@@ -3,18 +3,57 @@
 
 session_start();
 
-if(isset($_POST['Update'])) {
-			//header('location: AdminHome.php');
-	$id=$_POST['id'];
-		$pass = $_POST['pass'];
-		$cpass = $_POST['cpass'];
-		$uname = $_POST['uname'];
-		$email = $_POST['email'];
-		$utype= $_POST['utype'];
-
+if (isset($_POST['Update'])) {
 		
 
-		 if (empty($pass)==false && empty($cpass)==false) 
+		
+		$uname = $_POST['uname'];
+		$email = $_POST['email'];
+		$pass = $_POST['pass'];
+		$cpass = $_POST['cpass'];
+		//$utype =$_POST["utype"];
+		$id=$_GET['id'];
+
+		
+	 if ($pass!=$cpass) {
+			echo "password doesn't match";	
+		}
+		else{
+		 if (empty($email)==false) 
+		 	{
+			if (checkUniqueValue($email)) {
+				echo "Sorry. This email is already taken.";
+				exit();
+			}
+
+
+           else{
+            $conn=mysqli_connect('localhost','root','','web');
+			$sql="update info SET email='{$email}' where id='{$id}'";
+			$set=mysqli_query($conn,$sql);
+		header('location: viewinfo.php');
+		mysqli_close($conn);
+				}
+		}
+
+		 if (empty($uname)==false) 
+		 	{
+			if (checkUniqueValue($uname)) {
+				echo "Sorry. This uname is already taken.";
+				exit();
+			}
+
+
+           else{
+            $conn=mysqli_connect('localhost','root','','web');
+			$sql="update info SET uname='{$uname}' where id='{$id}'";
+			$set=mysqli_query($conn,$sql);
+		header('location: viewinfo.php');
+		mysqli_close($conn);
+				}
+		}
+
+		 if (empty($pass)==false && empty($pass)==false) 
 		 	{
           if($pass==$cpass){
             $conn=mysqli_connect('localhost','root','','web');
@@ -24,16 +63,12 @@ if(isset($_POST['Update'])) {
 		mysqli_close($conn);
 				}
 		}
-
-	}
-
-          
-
-		
+}
+		}
 
 
 elseif (isset($_POST['Back'])) {
-			header('location: AdminHome.php');
+			header('location: ViewInfo.php');
 		}
 		function checkUniqueValue($value){
 				 $conn=mysqli_connect('localhost','root','','web');						
@@ -70,6 +105,14 @@ elseif (isset($_POST['Back'])) {
 			<table cellpadding="5px">
 			<tr>
 					
+				<td>
+			Username:<br><input type="text" name="uname" value="">
+			</td>
+			
+			
+				<td>
+			Email:<br><input type="email" name="email" value="">
+			</td>
 			
 			
 				<td>
@@ -83,7 +126,11 @@ elseif (isset($_POST['Back'])) {
 			
 
 			
-		
+			<td>
+			<input type="radio" name="utype" value="User"/>User <br>
+			<input type="radio" name="utype" value="Admin"/>Admin
+			
+			</td>
 			
 			
 			
