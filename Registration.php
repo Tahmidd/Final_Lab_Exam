@@ -51,14 +51,14 @@ if(isset($_POST['signup'])){
 				 $conn=mysqli_connect('localhost','root','','web');						
 
 			$found = 0;
-						$sql="select * from info where uname='{$value}' or email='{$value}'";
+						$sql="select * from info where uname='{$value}' or id='{$value}'";
 			$get=mysqli_query($conn,$sql);
 			$user=mysqli_fetch_assoc($get);
 						if($user["uname"] == $value){
 							$found = 1;
 
 						}
-						if($user["email"] == $value){
+						if($user["id"] == $value){
 							$found = 1;
 						}
 					
