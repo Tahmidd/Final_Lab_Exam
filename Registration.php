@@ -37,7 +37,7 @@ if(isset($_POST['signup'])){
 				//exit();
 			}
 			else{
-            $conn=mysqli_connect('localhost','root','','fwa');
+            $conn=mysqli_connect('localhost','root','','web');
 			$sql="insert into info(id,pass,cpass,email,uname,utype) values('{$id}','{$pass}','{$cpass}','{$email}','{$uname}','{$utype}')";
 			$set=mysqli_query($conn,$sql);
 		header('location: signin.php');
@@ -48,7 +48,7 @@ if(isset($_POST['signup'])){
 
 
 			function checkUniqueValue($value){
-				 $conn=mysqli_connect('localhost','root','','fwa');						
+				 $conn=mysqli_connect('localhost','root','','web');						
 
 			$found = 0;
 						$sql="select * from info where uname='{$value}' or email='{$value}'";
@@ -97,7 +97,7 @@ if(isset($_POST['signup'])){
 			
 						<tr>
 				<td>
-					Name:<br><input type="name" name="name" value="">
+					Name:<br><input type="name" name="uname" value="">
 			</td>
 			</tr>
 			
@@ -110,9 +110,9 @@ if(isset($_POST['signup'])){
 			<tr>
 			<td>
 			<font > User Type <i>[USER/Admin]</i> </font><br>
-			<select>
-			<option name="utype" value="Employee">User</option>
-			<option name="utype" value="Admin">Admin</option>
+			<select name="utype">
+			<option  value="Employee">User</option>
+			<option  value="Admin">Admin</option>
 			</select>
 			
 			</td>
